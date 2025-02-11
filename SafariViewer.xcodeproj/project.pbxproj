@@ -149,6 +149,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_DEBUG_DYLIB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -162,6 +163,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Wl,-add_ast_path,$(TARGET_BUILD_DIR)/$(PRODUCT_NAME).swiftmodule/$(NATIVE_ARCH_ACTUAL)-$(LLVM_TARGET_TRIPLE_VENDOR)-$(SHALLOW_BUNDLE_TRIPLE).swiftmodule",
+					"\"-Wl,-ld_classic\"",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jenna.SafariViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -178,6 +184,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_DEBUG_DYLIB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -191,6 +198,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Wl,-add_ast_path,$(TARGET_BUILD_DIR)/$(PRODUCT_NAME).swiftmodule/$(NATIVE_ARCH_ACTUAL)-$(LLVM_TARGET_TRIPLE_VENDOR)-$(SHALLOW_BUNDLE_TRIPLE).swiftmodule",
+					"\"-Wl,-ld_classic\"",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jenna.SafariViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

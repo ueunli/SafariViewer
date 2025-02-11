@@ -38,14 +38,32 @@ class ViewController: UIViewController {
         // Breakpoint here 🤖
         // super.viewWillTransition(to: size, with: coordinator)
         // Breakpoint here 🤖
-        
-        // Not called...
-        print(dummy.view.window == getWindow())
-        print(dummy.view.window?.rootViewController == getWindow()?.rootViewController)
     }
-
+    
     @IBAction
     private func didTouchShowButton() {
+        /* 📌 [A] Present as it is : A bit normal
+         * - The custom toolBar color is cleared once rotated
+         * ↳ Normal if override viewWillTransition and don't call super
+         * - The topAnchor is destroyed when rotated
+         * ↳ So I tried [B]
+         */
+        // presentAsItIs(safari)
+        
+        /* 📌 [B] Present on another VC : A byte normal
+         * - The custom toolBar color is cleared once rotated
+         * ↳ Normal if override viewWillTransition and don't call super
+         * - Needs a dummy UIViewController because of the second problem of [A]
+         * ↳ Lukily the caller(ViewController) is an UIViewController itself in this sample but made another 'dummy' because sometimes it isn't.
+         */
+        // presentOnAnotherVc(safari)
+    }
+    
+    private func presentAsItIs(_ viewController: UIViewController) {
+        present(viewController, animated: false)
+    }
+    
+    private func presentOnAnotherVc(_ viewController: UIViewController) {
         dummy.addChild(safari)
         safari.didMove(toParent: dummy)
         
@@ -58,27 +76,7 @@ class ViewController: UIViewController {
             safari.view.trailingAnchor.constraint(equalTo: dummy.view.trailingAnchor)
         ])
         
-        /* 📌 [A] Present as it is : A bit normal
-         * - Annotate line49~59 before run
-         * - Not normal for same reason as [B]
-         * - The topAnchor is destroyed when rotated
-         */
-        // present(safari, animated: true)
-        
-        /* 📌 [B] Present on another VC : A byte normal
-         * - The custom toolBar color is cleared once rotated
-         * - Normal if don't call super in the overriden viewWillTransition
-         * - Need dummy VC because of the second problem of [A] (line52~59 is needed)
-         */
-        // present(dummy, animated: false)
-        // topMostViewController?.present(dummy, animated: false)
-        
-        /* 📌 [C] Present on certain window : Abnormal
-         * - The custom toolBar color is cleared once rotated
-         * - viewWillTransition is not called
-         * - Need it because sometimes we want to present a VC on another window
-         */
-        presentOnWindow(dummy, from: self)
+        present(dummy, animated: false)
     }
     
 }
