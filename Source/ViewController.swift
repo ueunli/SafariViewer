@@ -42,28 +42,53 @@ class ViewController: UIViewController {
     
     @IBAction
     private func didTouchShowButton() {
+        safari.removeFromParent()
+        safari.view.removeFromSuperview()
+        
         /* 📌 [A] Present as it is : A bit normal
          * - The custom toolBar color is cleared once rotated
          * ↳ Normal if override viewWillTransition and don't call super
          * - The topAnchor is destroyed when rotated
+         * ↳ Needs a parent UIViewController to give some constraints
          * ↳ So I tried [B]
          */
-        // presentAsItIs(safari)
+        // presentAsItIs()
         
-        /* 📌 [B] Present on another VC : A byte normal
+        /* 📌 [B] Present on current VC : A byte normal
          * - The custom toolBar color is cleared once rotated
          * ↳ Normal if override viewWillTransition and don't call super
-         * - Needs a dummy UIViewController because of the second problem of [A]
-         * ↳ Lukily the caller(ViewController) is an UIViewController itself in this sample but made another 'dummy' because sometimes it isn't.
+         * - As a matter of course, cannot close the webview
+         * ↳ Needs a dummy parent UIViewController to give some constraints
+         * ↳ So I tried [C]
          */
-        // presentOnAnotherVc(safari)
+        // presentOnCurrentVc()
+        
+        /* 📌 [C] Present on current VC : A byte normal
+         * - The custom toolBar color is cleared once rotated
+         * ↳ Normal if override viewWillTransition and don't call super
+         */
+        // presentOnAnotherVc()
     }
     
-    private func presentAsItIs(_ viewController: UIViewController) {
-        present(viewController, animated: false)
+    private func presentAsItIs() {
+        present(safari, animated: false)
     }
     
-    private func presentOnAnotherVc(_ viewController: UIViewController) {
+    private func presentOnCurrentVc() {
+        addChild(safari)
+        safari.didMove(toParent: self)
+        
+        view.addSubview(safari.view)
+        safari.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            safari.view.topAnchor.constraint(equalTo: view.topAnchor),
+            safari.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            safari.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            safari.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    private func presentOnAnotherVc() {
         dummy.addChild(safari)
         safari.didMove(toParent: dummy)
         
