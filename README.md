@@ -12,7 +12,7 @@ On iPadOS, the bottom bar area behaves differently, so I couldn’t confirm whet
 1. Present in landscape mode → Rotate to portrait
 
 ### [Issues]
-> You can observe the first issue by uncommenting case [B] and the second issue by uncommenting case [C].
+> You can observe the first issue by uncommenting case [A] and the second issue by uncommenting case [C].
 1. The topAnchor is positioned above the status bar’s topAnchor.
 1. The specified `preferredBarTintColor` and `preferredControlTintColor` are invalidated.
 
