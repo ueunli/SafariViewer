@@ -3,6 +3,8 @@ SFSafariViewController bug report
 
 ---
 ## Two Issues with Screen Rotation in SFSafariViewController
+When creating the sample project, I tested it on an iOS 18.0 device using Xcode 16.1(16B40), but the issue also appears to occur on iOS 16.2 and other versions.
+On iPadOS, the bottom bar area behaves differently, so I couldn’t confirm whether the same issue occurs. (Tested on the iPadOS 18.0 simulator.)
 
 ### [Reproduction Steps]
 > You can try either of these steps.
